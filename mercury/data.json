@@ -1,0 +1,393 @@
+{
+  "records": [
+    {
+      "id": "MP01",
+      "kind": "pin",
+      "updatedAt": "2026-10-15T18:46:35.062Z",
+      "body": {
+        "title": "Дизайн гостиной в загородном доме: спокойная тёмная палитра",
+        "description": "Проект гостиной в доме в Подмосковье. Мягкий диван, фактурный ковёр и спокойная тёмная палитра собирают пространство для отдыха. Посмотрите весь проект Mercury Bureau по ссылке. Планируете интерьер дома в Москве или Подмосковье? На странице проекта можно оставить заявку и обсудить вашу задачу.",
+        "status": "Опубликован",
+        "owner": "Codex",
+        "date": "2026-10-15T21:30",
+        "project": "Дом в Подмосковье",
+        "rubric": "Общий интерьер",
+        "board": "Дизайн загородного дома | Mercury",
+        "mediaType": "Дизайн-проект",
+        "alt": "Гостиная загородного дома: большой мягкий диван, низкий журнальный столик, фактурный ковёр и панорамные окна со шторами.",
+        "publishedAt": "2026-10-15",
+        "publishedUrl": "https://ru.pinterest.com/pin/451345193931140198/",
+        "target": "https://mercury-bureau.com/hause_mo",
+        "destination": "https://mercury-bureau.com/hause_mo?utm_source=Pinterest&utm_medium=organic&utm_campaign=mercury_launch_202610&utm_content=mp01_living_house",
+        "source": "https://mercury-bureau.com/hause_mo",
+        "mediaUrl": "https://i.pinimg.com/736x/74/f0/65/74f0659679a90fc3b473e01033e36831.jpg",
+        "checks": {
+          "media": true,
+          "copy": true,
+          "duplicate": false,
+          "link": true
+        }
+      }
+    },
+    {
+      "id": "MP02",
+      "kind": "pin",
+      "updatedAt": "2026-10-15T18:46:42.121Z",
+      "body": {
+        "title": "Гостиная с панорамными окнами в ЖК «Сердце столицы»",
+        "description": "Гостиная в проекте квартиры ЖК «Сердце столицы»: панорамные окна, мягкий диван и длинная низкая ТВ-тумба. Спокойная палитра помогает собрать интерьер в единую композицию. Посмотрите другие помещения этого проекта Mercury Bureau по ссылке. Планируете дизайн и реализацию квартиры в Москве? Оставьте заявку на странице проекта.",
+        "status": "Опубликован",
+        "owner": "Codex",
+        "date": "2026-10-15T21:45",
+        "project": "ЖК «Сердце столицы»",
+        "rubric": "Кейс",
+        "board": "Дизайн квартиры в Москве | Mercury",
+        "mediaType": "Дизайн-проект",
+        "alt": "Гостиная квартиры с панорамными окнами, мягким тёмным диваном, ковром и длинной низкой тумбой под телевизор.",
+        "publishedAt": "2026-10-15",
+        "publishedUrl": "https://ru.pinterest.com/pin/625718942027147882/",
+        "target": "https://mercury-bureau.com/serdce-stolici",
+        "destination": "https://mercury-bureau.com/serdce-stolici?utm_source=Pinterest&utm_medium=organic&utm_campaign=mercury_launch_202610&utm_content=mp02_serdce",
+        "source": "https://mercury-bureau.com/serdce-stolici",
+        "mediaUrl": "https://i.pinimg.com/736x/69/46/eb/6946eb74651478f3d3057bd8c6c6869a.jpg",
+        "checks": {
+          "media": true,
+          "copy": true,
+          "duplicate": false,
+          "link": true
+        }
+      }
+    },
+    {
+      "id": "MP03",
+      "kind": "pin",
+      "updatedAt": "2026-10-15T18:46:53.393Z",
+      "body": {
+        "title": "Тёмная кухня-гостиная: дерево, камень и панорамные окна",
+        "description": "В проекте дома Вишняковские дачи тёмная кухня объединена с гостиной и столовой. Дерево, тёмные поверхности и панорамные окна задают характер пространства. Сохраните идею для своего дома. По ссылке — проекты Mercury Bureau и возможность обсудить дизайн и реализацию в Москве и Подмосковье.",
+        "status": "План",
+        "owner": "Codex",
+        "date": "2026-10-16T12:00",
+        "project": "Дом Вишняковские дачи",
+        "rubric": "Общий интерьер",
+        "board": "Кухня-гостиная | Mercury",
+        "mediaType": "Дизайн-проект",
+        "alt": "",
+        "publishedAt": "",
+        "publishedUrl": "",
+        "target": "https://mercury-bureau.com/design-projects",
+        "destination": "https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp03",
+        "source": "https://disk.yandex.ru/d/TPS5n7W96SjH5g",
+        "mediaUrl": "",
+        "checks": {
+          "media": false,
+          "copy": true,
+          "duplicate": false,
+          "link": false
+        }
+      }
+    },
+    {
+      "id": "MP04",
+      "kind": "pin",
+      "updatedAt": "2026-10-15T18:47:03.628Z",
+      "body": {
+        "title": "Встроенное хранение в прихожей: шкафы до потолка",
+        "description": "Шкафы до потолка помогают собрать хранение в единую плоскость. В проекте КП Новогорск Клаб спокойные фасады сочетаются с деревом и встроенным освещением. Рассмотрите решение для прихожей и сохраните как ориентир. Проекты Mercury Bureau и обсуждение вашей задачи — по ссылке.",
+        "status": "План",
+        "owner": "Codex",
+        "date": "2026-10-17T12:00",
+        "project": "КП Новогорск Клаб 1",
+        "rubric": "Решение",
+        "board": "Прихожая и хранение | Mercury",
+        "mediaType": "Дизайн-проект",
+        "alt": "",
+        "publishedAt": "",
+        "publishedUrl": "",
+        "target": "https://mercury-bureau.com/design-projects",
+        "destination": "https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp04",
+        "source": "https://disk.yandex.ru/d/TPS5n7W96SjH5g",
+        "mediaUrl": "",
+        "checks": {
+          "media": false,
+          "copy": true,
+          "duplicate": false,
+          "link": false
+        }
+      }
+    },
+    {
+      "id": "MP05",
+      "kind": "pin",
+      "updatedAt": "2026-10-15T18:47:08.982Z",
+      "body": {
+        "title": "Кухонный остров и вытяжка в тёмном интерьере дома",
+        "description": "Кухонный остров и прямоугольная вытяжка становятся центром композиции. В проекте Вишняковские дачи их геометрию поддерживают тёмные поверхности и дерево. Посмотрите, как крупные объёмы работают вместе. Обсудить проект вашего дома с Mercury Bureau можно по ссылке.",
+        "status": "План",
+        "owner": "Codex",
+        "date": "2026-10-18T12:00",
+        "project": "Дом Вишняковские дачи",
+        "rubric": "Деталь",
+        "board": "Кухня-гостиная | Mercury",
+        "mediaType": "Дизайн-проект",
+        "alt": "",
+        "publishedAt": "",
+        "publishedUrl": "",
+        "target": "https://mercury-bureau.com/design-projects",
+        "destination": "https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp05",
+        "source": "https://disk.yandex.ru/d/TPS5n7W96SjH5g",
+        "mediaUrl": "",
+        "checks": {
+          "media": false,
+          "copy": true,
+          "duplicate": false,
+          "link": false
+        }
+      }
+    },
+    {
+      "id": "MP06",
+      "kind": "pin",
+      "updatedAt": "2026-10-15T18:47:13.832Z",
+      "body": {
+        "title": "Зеркало с подсветкой в ванной: идея из дизайн-проекта",
+        "description": "Круглое зеркало с подсветкой смягчает строгую геометрию ванной. Пример из проекта КП Новогорск Клаб: лаконичная композиция, спокойные оттенки и акцентный свет. Сохраните идею. По ссылке — проекты Mercury Bureau и форма для обсуждения вашего интерьера.",
+        "status": "План",
+        "owner": "Codex",
+        "date": "2026-10-19T12:00",
+        "project": "КП Новогорск Клаб 1",
+        "rubric": "Решение",
+        "board": "Ванная комната | Mercury",
+        "mediaType": "Дизайн-проект",
+        "alt": "",
+        "publishedAt": "",
+        "publishedUrl": "",
+        "target": "https://mercury-bureau.com/design-projects",
+        "destination": "https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp06",
+        "source": "https://disk.yandex.ru/d/TPS5n7W96SjH5g",
+        "mediaUrl": "",
+        "checks": {
+          "media": false,
+          "copy": true,
+          "duplicate": false,
+          "link": false
+        }
+      }
+    },
+    {
+      "id": "MP07",
+      "kind": "pin",
+      "updatedAt": "2026-10-15T18:47:18.656Z",
+      "body": {
+        "title": "Реечный потолок и свет в кухне-гостиной загородного дома",
+        "description": "Тёмный реечный потолок и встроенные светильники поддерживают архитектуру кухни-гостиной в проекте Вишняковские дачи. Это пример того, как потолок участвует в общей композиции интерьера. Больше проектов Mercury Bureau и возможность обсудить вашу задачу — по ссылке.",
+        "status": "План",
+        "owner": "Codex",
+        "date": "2026-10-20T12:00",
+        "project": "Дом Вишняковские дачи",
+        "rubric": "Разбор",
+        "board": "Дизайн загородного дома | Mercury",
+        "mediaType": "Дизайн-проект",
+        "alt": "",
+        "publishedAt": "",
+        "publishedUrl": "",
+        "target": "https://mercury-bureau.com/design-projects",
+        "destination": "https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp07",
+        "source": "https://disk.yandex.ru/d/TPS5n7W96SjH5g",
+        "mediaUrl": "",
+        "checks": {
+          "media": false,
+          "copy": true,
+          "duplicate": false,
+          "link": false
+        }
+      }
+    },
+    {
+      "id": "MP08",
+      "kind": "pin",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Стеклянная перегородка в душевой: лаконичный интерьер ванной",
+        "description": "Стеклянная перегородка отделяет душевую зону и сохраняет обзор пространства. Решение из проекта КП Новогорск Клаб. Сохраните идею для будущего интерьера. Обсудить дизайн и реализацию квартиры или дома в Москве и Подмосковье с Mercury Bureau можно по ссылке.",
+        "status": "План",
+        "owner": "Codex",
+        "date": "2026-10-21T12:00",
+        "project": "КП Новогорск Клаб 1",
+        "rubric": "Деталь",
+        "board": "Ванная комната | Mercury",
+        "mediaType": "Дизайн-проект",
+        "alt": "",
+        "publishedAt": "",
+        "publishedUrl": "",
+        "target": "https://mercury-bureau.com/design-projects",
+        "destination": "https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp08",
+        "source": "https://disk.yandex.ru/d/TPS5n7W96SjH5g",
+        "mediaUrl": "",
+        "checks": {
+          "media": false,
+          "copy": true,
+          "duplicate": false,
+          "link": false
+        }
+      }
+    },
+    {
+      "id": "T01",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:40:44.800Z",
+      "body": {
+        "title": "Заполнить медиаплан на неделю",
+        "description": "Восемь пинов внесены в медиаплан; страница опубликована. Тексты, даты, доски, ссылки с UTM и задачи доступны для редактирования.",
+        "status": "Готово",
+        "owner": "Codex",
+        "category": "Контент",
+        "due": "2026-10-15"
+      }
+    },
+    {
+      "id": "T02",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:47:23.472Z",
+      "body": {
+        "title": "Проверить и опубликовать первые пины",
+        "description": "Опубликованы и проверены MP01 и MP02. Оба ведут на соответствующие кейсы Mercury с отдельными utm_content; прямые ссылки сохранены. Следующие шесть публикаций пока в плане.",
+        "status": "Готово",
+        "owner": "Codex",
+        "category": "Публикация",
+        "due": "2026-10-15"
+      }
+    },
+    {
+      "id": "T03",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:47:28.233Z",
+      "body": {
+        "title": "Отобрать оригиналы с Яндекс Диска",
+        "description": "Для MP03–MP08 нужны конкретные исходники Вишняковских дач и Новогорска. Просмотр вкладки Яндекс Диска ограничен защитой браузера после авторизации. Архив целиком не нужен. Первые два пина импортированы с сайта; он отдаёт превью 504 px. Следующие готовим из оригиналов от 1000 px.",
+        "status": "Блокер",
+        "owner": "Codex",
+        "category": "Материалы",
+        "due": "2026-10-16"
+      }
+    },
+    {
+      "id": "T04",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Сверить изображения с архивом Pinterest",
+        "description": "Сохранить известные опубликованные ссылки. Полная сверка старого архива пока не сделана.",
+        "status": "К выполнению",
+        "owner": "Codex",
+        "category": "Контент",
+        "due": "2026-10-16"
+      }
+    },
+    {
+      "id": "T05",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:47:33.892Z",
+      "body": {
+        "title": "Подготовить тематические доски",
+        "description": "Созданы доски «Дизайн загородного дома | Mercury» и «Дизайн квартиры в Москве | Mercury», на каждой размещён стартовый пин. Далее — описания досок и тематические доски кухни, хранения и ванной по мере подготовки материалов.",
+        "status": "В работе",
+        "owner": "Codex",
+        "category": "Профиль",
+        "due": "2026-10-15"
+      }
+    },
+    {
+      "id": "T06",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Проверить доставку заявок с сайта",
+        "description": "Тестовая заявка и подтверждение получения ответственным. Доступ к CRM/получателю заявок пока не предоставлен.",
+        "status": "Блокер",
+        "owner": "Студия",
+        "category": "Воронка",
+        "due": "2026-10-16"
+      }
+    },
+    {
+      "id": "T07",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Настроить цели и учёт заявок",
+        "description": "Отправка формы, клики в мессенджеры, сохранение UTM. Клик в мессенджер не считать лидом. Нужен доступ к аналитике сайта.",
+        "status": "Блокер",
+        "owner": "Студия",
+        "category": "Воронка",
+        "due": "2026-10-16"
+      }
+    },
+    {
+      "id": "T08",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Связать профиль с Mercury",
+        "description": "Уточнить представление Андрея и студии в имени, описании и ссылке. Старые ссылки пинов массово не менять.",
+        "status": "К выполнению",
+        "owner": "Codex",
+        "category": "Профиль",
+        "due": "2026-10-17"
+      }
+    },
+    {
+      "id": "T09",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Подключить поддерживаемый планировщик",
+        "description": "Выбрать интеграцию Pinterest, проверить создание публикации и возврат её URL. Доска плана сама не публикует.",
+        "status": "К выполнению",
+        "owner": "Codex + Александр",
+        "category": "Автоматизация",
+        "due": "2026-10-19"
+      }
+    },
+    {
+      "id": "T10",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Подготовить 2 тестовых ИИ-концепта",
+        "description": "Отдельно от портфолио. Проверка дизайнером, маркировка ИИ. Пока не входят в первую неделю.",
+        "status": "К выполнению",
+        "owner": "Codex + дизайнер",
+        "category": "ИИ",
+        "due": "2026-10-21"
+      }
+    },
+    {
+      "id": "T11",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Добавить материалы Mail.ru с Windows",
+        "description": "Когда папка будет доступна: каталог, проекты, тип медиа и проверка дублей. Не блокирует старт.",
+        "status": "К выполнению",
+        "owner": "Александр",
+        "category": "Материалы",
+        "due": ""
+      }
+    },
+    {
+      "id": "T12",
+      "kind": "task",
+      "updatedAt": "2026-10-15T18:30:00.000Z",
+      "body": {
+        "title": "Подвести итоги первой недели",
+        "description": "Проверить живые ссылки и переходы; лиды — по данным сайта/CRM. Не делать вывод об окупаемости за одну неделю.",
+        "status": "К выполнению",
+        "owner": "Codex",
+        "category": "Аналитика",
+        "due": "2026-10-22"
+      }
+    }
+  ],
+  "checkedAt": "2026-10-15T19:14:54.364Z"
+}
