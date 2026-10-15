@@ -29,16 +29,24 @@ export default function MercuryDesk() {
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('Все статусы');
   const busy = useRef(false);
+  const hasSnapshot = useRef(false);
   async function refresh() {
     if (busy.current) return;
     busy.current = true;
     try {
-      const res = await fetch('/mercury/data.json', { cache: 'no-store', signal: AbortSignal.timeout(20000) });
+      const res = await fetch('https://raw.githubusercontent.com/peoplewannafly-ship-it/clarra-portfolio-stress-test-static/main/mercury/data.json', { cache: 'no-store', signal: AbortSignal.timeout(20000) });
       if (!res.ok) throw Error('Не удалось обновить данные доски. Попробуйте позже.');
       const data = await res.json() as { records: SharedRecord[]; checkedAt: string; error?: string };
       if (!res.ok || !Array.isArray(data.records)) throw Error(data.error || 'Не удалось загрузить план.');
-      setRecords(data.records); setCheckedAt(data.checkedAt); setError('');
-    } catch (e) { setError(e instanceof Error ? e.message : 'Не удалось обновить план.'); }
+      setRecords(data.records); setCheckedAt(data.checkedAt); hasSnapshot.current = true; setError('');
+    } catch {
+      if (!hasSnapshot.current) try {
+        const fallback = await fetch('/mercury/data.json', {cache:'no-store',signal:AbortSignal.timeout(5000)});
+        const saved = await fallback.json() as {records?:SharedRecord[];checkedAt?:string};
+        if (fallback.ok && Array.isArray(saved.records) && typeof saved.checkedAt === 'string') {setRecords(saved.records); setCheckedAt(saved.checkedAt); hasSnapshot.current = true;}
+      } catch {}
+      setError('Не удалось проверить свежие изменения доски. Попробуйте позже.');
+    }
     finally { busy.current = false; setLoading(false); }
   }
   useEffect(() => {
