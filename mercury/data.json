@@ -61,29 +61,29 @@
     {
       "id": "MP03",
       "kind": "pin",
-      "updatedAt": "2026-10-15T18:46:53.393Z",
+      "updatedAt": "2026-10-16T18:19:06.965Z",
       "body": {
         "title": "Тёмная кухня-гостиная: дерево, камень и панорамные окна",
-        "description": "В проекте дома Вишняковские дачи тёмная кухня объединена с гостиной и столовой. Дерево, тёмные поверхности и панорамные окна задают характер пространства. Сохраните идею для своего дома. По ссылке — проекты Mercury Bureau и возможность обсудить дизайн и реализацию в Москве и Подмосковье.",
-        "status": "План",
+        "description": "Кухня, столовая и зона отдыха — в одном пространстве. В дизайн-проекте дома «Вишняковские дачи» тёмные деревянные фасады сочетаются с каменными поверхностями, мягким диваном и панорамными окнами. На изображении — визуализация проекта Mercury Bureau. Сохраните идею для своего дома. Полный проект — по ссылке. Планируете дизайн и реализацию дома в Москве или Подмосковье? На странице проекта можно обсудить вашу задачу.",
+        "status": "Опубликован",
         "owner": "Codex",
         "date": "2026-10-16T12:00",
         "project": "Дом Вишняковские дачи",
         "rubric": "Общий интерьер",
         "board": "Кухня-гостиная | Mercury",
         "mediaType": "Дизайн-проект",
-        "alt": "",
-        "publishedAt": "",
-        "publishedUrl": "",
-        "target": "https://mercury-bureau.com/design-projects",
-        "destination": "https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp03",
+        "alt": "Визуализация кухни-гостиной загородного дома: серый модульный диван и низкий столик на переднем плане, за ними столовая и тёмная кухня с островом; слева — панорамные окна со шторами.",
+        "publishedAt": "2026-10-16",
+        "publishedUrl": "https://ru.pinterest.com/pin/625718942027164655/",
+        "target": "https://mercury-bureau.com/hause_mo",
+        "destination": "https://mercury-bureau.com/hause_mo?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp03",
         "source": "https://disk.yandex.ru/d/TPS5n7W96SjH5g",
-        "mediaUrl": "",
+        "mediaUrl": "https://i.pinimg.com/736x/33/00/b0/3300b0dc12287ada9c022f51bec0d6bb.jpg",
         "checks": {
-          "media": false,
+          "media": true,
           "copy": true,
           "duplicate": false,
-          "link": false
+          "link": true
         }
       }
     },
@@ -389,5 +389,5 @@
       }
     }
   ],
-  "checkedAt": "2026-10-16T14:34:51.524Z"
+  "checkedAt": "2026-10-16T18:19:09.055Z"
 }
