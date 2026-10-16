@@ -22,16 +22,22 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
+      - name: Validate public projection and update contract
+        id: validation
+        run: node --test mercury/sync/tests/projection.test.mjs
       - name: Update existing source records with revision checks
         env:
           MERCURY_PLAN_READ_TOKEN: ${{ secrets.MERCURY_PLAN_READ_TOKEN }}
           BOARD_CHANGES: ${{ inputs.changes }}
         run: node mercury/sync/update.mjs
       - name: Refresh public projection
+        id: snapshot
+        if: ${{ !cancelled() && steps.validation.outcome == 'success' }}
         env:
           MERCURY_PLAN_READ_TOKEN: ${{ secrets.MERCURY_PLAN_READ_TOKEN }}
         run: node mercury/sync/sync.mjs
       - name: Publish only Mercury data
+        if: ${{ !cancelled() && steps.snapshot.outcome == 'success' }}
         run: |
           git add -- mercury/data.json
           if git diff --cached --quiet; then exit 0; fi

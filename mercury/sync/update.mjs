@@ -2,7 +2,7 @@ import {isDeepStrictEqual} from 'node:util';
 
 // Invoked only by an authenticated manual workflow dispatch. Never publishes Pins.
 const endpoint='https://mercury-content-desk.peoplewannafly.chatgpt.site/api/records';
-const fields=new Set(['title','description','status','owner','date','project','rubric','board','mediaType','alt','publishedAt','publishedUrl','target','destination','source','mediaUrl','checks','scheduleEvidence','notes','category','due']);
+const fields=new Set(['title','description','status','owner','date','project','rubric','board','mediaType','alt','publishedAt','publishedUrl','target','destination','source','mediaUrl','checks','scheduleEvidence','notes','category','due','lastAction','nextAction']);
 const links=new Set(['publishedUrl','target','destination','source','mediaUrl']);
 const hosts=new Set(['pinterest.com','ru.pinterest.com','www.pinterest.com','i.pinimg.com','mercury-bureau.com','www.mercury-bureau.com','disk.yandex.ru']);
 const changes=JSON.parse(process.env.BOARD_CHANGES||'null');
@@ -12,6 +12,7 @@ for(const change of changes){
   if(!change||Object.keys(change).some(k=>!['id','body'].includes(k))||!/^MP0[1-8]$|^T(?:0[1-9]|1[0-2])$/.test(change.id)||seen.has(change.id))throw Error('Invalid or repeated record id');
   seen.add(change.id);
   if(!change.body||Array.isArray(change.body)||typeof change.body!=='object'||!Object.keys(change.body).length)throw Error('Expected field patch');
+  if(typeof change.body.lastAction!=='string'||!change.body.lastAction.trim()||change.body.lastAction.length>1500||typeof change.body.nextAction!=='string'||change.body.nextAction.length>1000)throw Error('Every action requires a public lastAction summary and nextAction (empty only when finished)');
   for(const [key,value] of Object.entries(change.body)){
     if(!fields.has(key))throw Error('Unexpected field');
     if(key==='checks'){
@@ -34,6 +35,7 @@ for(const c of changes){const r=byId.get(c.id);if(!r||!r.body||!Number.isInteger
 for(const c of changes){
  const r=byId.get(c.id);const body={...r.body,...c.body, ...(c.body.checks?{checks:{...r.body.checks,...c.body.checks}}:{})};
  if(isDeepStrictEqual(r.body,body)){console.log(`${c.id}: already applied`);continue;}
+ body.lastActionRevision=r.revision+1;
  const result=await request('POST',{id:r.id,kind:r.kind,revision:r.revision,body});
  if(!result.record||result.record.id!==r.id||result.record.revision!==r.revision+1||!isDeepStrictEqual(result.record.body,body))throw Error('Write confirmation mismatch');
  byId.set(c.id,result.record);console.log(`${c.id}: saved revision ${result.record.revision}`);

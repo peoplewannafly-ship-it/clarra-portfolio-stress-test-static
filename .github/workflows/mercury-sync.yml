@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
+      - name: Validate public projection
+        run: node --test mercury/sync/tests/projection.test.mjs
       - name: Read approved Mercury records
         env:
           MERCURY_PLAN_READ_TOKEN: ${{ secrets.MERCURY_PLAN_READ_TOKEN }}
