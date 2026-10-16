@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import type { SharedRecord } from './data';
+import type { SharedRecord, Activity } from './data';
 import s from './mercury.module.css';
 
 const editUrl = 'https://mercury-content-desk.peoplewannafly.chatgpt.site';
 const outbound = { target: '_blank', rel: 'noopener noreferrer' };
-const tabs = [['plan', 'Медиаплан'], ['tasks', 'Задачи'], ['reports', 'Отчёты']] as const;
+const tabs = [['overview', 'Обзор'], ['plan', 'Медиаплан'], ['tasks', 'Задачи'], ['activity', 'Журнал'], ['reports', 'Отчёты']] as const;
 type Tab = typeof tabs[number][0];
 const statuses = ['Все статусы', 'План', 'В работе', 'Готов', 'В очереди', 'Опубликован', 'Пауза'];
 function date(value: string, time = false) {
@@ -22,7 +22,8 @@ function Badge({ value }: { value: string }) {
 
 export default function MercuryDesk() {
   const [records, setRecords] = useState<SharedRecord[]>([]);
-  const [tab, setTab] = useState<Tab>('plan');
+  const [activity, setActivity] = useState<Activity[]>([]);
+  const [tab, setTab] = useState<Tab>('overview');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [checkedAt, setCheckedAt] = useState('');
@@ -34,23 +35,23 @@ export default function MercuryDesk() {
     if (busy.current) return;
     busy.current = true;
     try {
-      const res = await fetch('https://raw.githubusercontent.com/peoplewannafly-ship-it/clarra-portfolio-stress-test-static/main/mercury/data.json', { cache: 'no-store', signal: AbortSignal.timeout(20000) });
+      const res = await fetch('https://raw.githubusercontent.com/peoplewannafly-ship-it/clarra-portfolio-stress-test-static/main/mercury/data.json?refresh=' + Math.floor(Date.now()/30000), { cache: 'no-store', signal: AbortSignal.timeout(20000) });
       if (!res.ok) throw Error('Не удалось обновить данные доски. Попробуйте позже.');
-      const data = await res.json() as { records: SharedRecord[]; checkedAt: string; error?: string };
+      const data = await res.json() as { records: SharedRecord[]; activity?: Activity[]; checkedAt: string; error?: string };
       if (!res.ok || !Array.isArray(data.records)) throw Error(data.error || 'Не удалось загрузить план.');
-      setRecords(data.records); setCheckedAt(data.checkedAt); hasSnapshot.current = true; setError('');
+      setRecords(data.records); setActivity(Array.isArray(data.activity) ? data.activity : []); setCheckedAt(data.checkedAt); hasSnapshot.current = true; setError('');
     } catch {
       if (!hasSnapshot.current) try {
         const fallback = await fetch('/mercury/data.json', {cache:'no-store',signal:AbortSignal.timeout(5000)});
-        const saved = await fallback.json() as {records?:SharedRecord[];checkedAt?:string};
-        if (fallback.ok && Array.isArray(saved.records) && typeof saved.checkedAt === 'string') {setRecords(saved.records); setCheckedAt(saved.checkedAt); hasSnapshot.current = true;}
+        const saved = await fallback.json() as {records?:SharedRecord[];activity?:Activity[];checkedAt?:string};
+        if (fallback.ok && Array.isArray(saved.records) && typeof saved.checkedAt === 'string') {setRecords(saved.records); setActivity(Array.isArray(saved.activity) ? saved.activity : []); setCheckedAt(saved.checkedAt); hasSnapshot.current = true;}
       } catch {}
       setError('Не удалось проверить свежие изменения доски. Попробуйте позже.');
     }
     finally { busy.current = false; setLoading(false); }
   }
   useEffect(() => {
-    const readHash = () => { const h = location.hash; setTab(h.startsWith('#report') ? 'reports' : h === '#tasks' ? 'tasks' : 'plan'); };
+    const readHash = () => { const h = location.hash; setTab(h.startsWith('#report') ? 'reports' : h === '#tasks' ? 'tasks' : h === '#activity' ? 'activity' : h === '#plan' ? 'plan' : 'overview'); };
     readHash(); void refresh();
     const timer = setInterval(() => { if (!document.hidden) void refresh(); }, 30000);
     const visible = () => { if (!document.hidden) void refresh(); };
@@ -59,7 +60,7 @@ export default function MercuryDesk() {
   }, []);
   function selectTab(next: Tab) {
     setTab(next); setQuery(''); setStatus('Все статусы');
-    history.replaceState(null, '', next === 'reports' ? '#report-2026-10-15' : next === 'tasks' ? '#tasks' : '#plan');
+    history.replaceState(null, '', next === 'reports' ? '#report-2026-10-15' : '#' + next);
   }
   const pins = records.filter(r => r.kind === 'pin').sort((a, b) => a.body.date.localeCompare(b.body.date));
   const tasks = records.filter(r => r.kind === 'task');
@@ -76,13 +77,15 @@ export default function MercuryDesk() {
     <main className={s.main}>
       <section className={s.hero}><div><p className={s.eyebrow}>PINTEREST / МОСКВА</p><h1>От интерьера<br />к первой заявке.</h1><p className={s.intro}>Публикации, задачи и фактический результат запуска —<br className={s.desktopBreak} /> в одном рабочем плане для команды Mercury.</p></div><div className={s.week}><span>ПЕРВАЯ НЕДЕЛЯ</span><strong>15—21</strong><p>октября 2026 · МСК</p><span className={s.live}><i />Общий просмотр</span></div></section>
       <section className={s.stats} aria-label="Текущие показатели плана">{[['В медиаплане', pins.length, 'тем на первую неделю'], ['Опубликовано', done, 'с прямой ссылкой на пин'], ['В очереди', pins.filter(r => r.body.status === 'В очереди').length, 'подтверждено в Pinterest'], ['Задач выполнено', tasks.filter(r => r.body.status === 'Готово').length, `из ${tasks.length || '—'} задач`]].map(([label, n, text], i) => <div key={String(label)} className={i === 1 ? s.statAccent : ''}><span>{label}</span><strong>{loading || (!records.length && error) ? '—' : String(n).padStart(2, '0')}</strong><small>{text}</small></div>)}</section>
-      <div className={s.navRow}><nav aria-label="Разделы контент-плана">{tabs.map(([key, label]) => <button key={key} className={tab === key ? s.active : ''} aria-pressed={tab === key} onClick={() => selectTab(key)}>{label}{key === 'reports' && <span>01</span>}</button>)}</nav><div className={s.sync} aria-live="polite">{loading ? 'Загружаем данные…' : error ? 'Обновление недоступно' : `Данные на ${new Date(checkedAt).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Moscow' })} МСК`}<button onClick={() => void refresh()} aria-label="Обновить данные">↻</button></div></div>
+      <div className={s.navRow}><nav aria-label="Разделы контент-плана">{tabs.map(([key, label]) => <button key={key} className={tab === key ? s.active : ''} aria-pressed={tab === key} onClick={() => selectTab(key)}>{label}{key === 'reports' && <span>01</span>}</button>)}</nav><div className={s.sync} aria-live="polite">{loading ? 'Загружаем данные…' : error ? 'Обновление недоступно' : `Данные на ${date(checkedAt, true)} МСК`}<button onClick={() => void refresh()} aria-label="Обновить данные">↻</button></div></div>
       {checkedAt && Date.now()-Date.parse(checkedAt)>7200000 && !error && <div role="status" className={s.error}>Снимок данных старше двух часов. Сверьте последние изменения в рабочей доске.</div>}
       {error && <div role="alert" className={s.error}>{error} {records.length > 0 && 'Показана последняя успешно загруженная версия.'}<button onClick={() => void refresh()}>Повторить</button></div>}
+      {tab === 'overview' && <Overview pins={pins} tasks={tasks} activity={activity} selectTab={selectTab} loading={loading} />}
+      {tab === 'activity' && <><div className={s.sectionHeading}><div><p className={s.eyebrow}>ИСТОРИЯ РАБОЧЕЙ ДОСКИ</p><h2>Последние действия</h2></div><p>Время — московское. Только сохранённые действия, без прогнозов.</p></div><ActivityList entries={activity} loading={loading} /></>}
       {tab === 'plan' && <><div className={s.notice}><b>Трафик → Mercury Bureau</b><p>Пин → страница проекта → заявка → звонок → встреча. Статус «В очереди» подтверждён в планировщике Pinterest; «Опубликован» — живой ссылкой на пин.</p></div><div className={s.tools}><input aria-label="Поиск публикаций" placeholder="Найти тему или проект…" value={query} onChange={e => setQuery(e.target.value)} /><select aria-label="Статус публикации" value={status} onChange={e => setStatus(e.target.value)}>{statuses.map(v => <option key={v}>{v}</option>)}</select><button onClick={csv} disabled={!pins.length}>↓ Выгрузить CSV</button></div><div className={s.pinGrid}>{visible.map(r => <Pin key={r.id} r={r} />)}</div>{!visible.length && <p className={s.empty}>{loading ? 'Загружаем медиаплан…' : error ? 'План появится после восстановления соединения.' : 'По выбранным условиям публикаций нет.'}</p>}<p className={s.note}>Регулярность старта: два пина 15 октября, затем по одному в день до 21 октября. Актуальные статусы и изображения — в карточках выше. Выход из очереди проверяем по фактической публикации.</p></>}
-      {tab === 'tasks' && <><div className={s.sectionHeading}><div><p className={s.eyebrow}>ПОСТИМ · РЕДАКТИРУЕМ · ГЕНЕРИРУЕМ</p><h2>Задачи по развитию Pinterest</h2></div><p>Статусы обновляются из рабочей доски.</p></div><div className={s.tasks}>{tasks.map(r => <article key={r.id} className={s.task}><span className={s.taskId}>{r.id}</span><div><span className={s.kicker}>{r.body.category}</span><h3>{r.body.title}</h3><p>{r.body.description}</p><small>{r.body.owner || 'Не назначено'} · {date(r.body.due)}</small></div><Badge value={r.body.status} /></article>)}</div>{!tasks.length && <p className={s.empty}>{loading ? 'Загружаем задачи…' : 'Задачи временно недоступны. Попробуйте обновить данные.'}</p>}</>}
+      {tab === 'tasks' && <><div className={s.sectionHeading}><div><p className={s.eyebrow}>ПОСТИМ · РЕДАКТИРУЕМ · ГЕНЕРИРУЕМ</p><h2>Задачи по развитию Pinterest</h2></div><p>Статусы обновляются из рабочей доски.</p></div><div className={s.tasks}>{tasks.map(r => <article key={r.id} className={s.task}><span className={s.taskId}>{r.id}</span><div><span className={s.kicker}>{r.body.category}</span><h3>{r.body.title}</h3><p>{r.body.description}</p>{r.body.nextAction && <p className={s.nextAction}><b>Далее:</b> {r.body.nextAction}</p>}<small>{r.body.owner || 'Не назначено'} · {date(r.body.due)}</small></div><Badge value={r.body.status} /></article>)}</div>{!tasks.length && <p className={s.empty}>{loading ? 'Загружаем задачи…' : 'Задачи временно недоступны. Попробуйте обновить данные.'}</p>}</>}
       {tab === 'reports' && <Report />}
-      <footer className={s.footer}><span>Mercury Bureau × Clarra</span><p>Просмотр доступен по ссылке. Данные обновляются из рабочей доски.<br />Возможны задержки синхронизации; время последней проверки указано выше.</p><a href={editUrl} {...outbound}>Открыть рабочую доску ↗</a></footer>
+      <footer className={s.footer}><span>Mercury Bureau × Clarra</span><p>Просмотр доступен по ссылке. После действий обновляем рабочую доску и этот трекер.<br />Открытая страница проверяет обновления каждые 30 секунд. Время проверки — выше.</p><a href={editUrl} {...outbound}>Открыть рабочую доску ↗</a></footer>
     </main>
   </div>;
 }
@@ -93,6 +96,39 @@ function Pin({ r }: { r: SharedRecord }) {
     <div className={s.pinVisual}>{b.mediaUrl ? <img src={b.mediaUrl} alt={b.alt || b.title} loading="lazy" onError={e => { e.currentTarget.style.display = 'none'; }} /> : <div className={s.placeholder}><span>{r.id.replace('MP', '')}</span><p>Визуал в подборе</p><small>{b.project}</small></div>}<span className={s.imageType}>{b.mediaType}</span></div>
     <div className={s.pinBody}><div className={s.pinMeta}><span>{r.id} · {date(b.date, true)} МСК</span><Badge value={b.status} /></div><p className={s.kicker}>{b.project}</p><h2>{b.title}</h2><p className={s.board}>{b.board}</p><div className={s.checks}>{[['media', 'Визуал'], ['copy', 'Текст'], ['duplicate', 'Дубли'], ['link', 'Ссылка']].map(([key, label]) => <span key={key} className={b.checks?.[key] ? s.checkDone : ''}>{b.checks?.[key] ? '✓' : '○'} {label}</span>)}</div><details><summary>Текст и ссылки <span>＋</span></summary><p className={s.description}>{b.description}</p><div className={s.detailLinks}>{b.destination && <a href={b.destination} {...outbound}>Целевая страница с UTM ↗</a>}{b.source && <a href={b.source} {...outbound}>Источник материала ↗</a>}</div></details>{b.publishedUrl ? <a href={b.publishedUrl} {...outbound} className={s.publishedLink}>Смотреть опубликованный пин <span>↗</span></a> : <div className={s.notPublished}>{b.status === 'В очереди' ? 'Есть подтверждение очереди Pinterest' : 'Публикация ещё не подтверждена'}</div>}</div>
   </article>;
+}
+
+function ActivityList({ entries, loading = false }: { entries: Activity[]; loading?: boolean }) {
+  if (!entries.length) return <p className={s.empty}>{loading ? 'Загружаем журнал…' : 'Сохранённых действий пока нет.'}</p>;
+  return <ol className={s.activityList}>{entries.map(e => <li key={e.id} className={s.activityItem}>
+    <time dateTime={e.at}>{date(e.at, true)}<span>МСК · {e.recordId}</span></time>
+    <div><div className={s.activityMeta}><span>{e.kind === 'pin' ? 'Публикация' : 'Задача'}</span><Badge value={e.status} /></div><h3>{e.title}</h3>
+      {e.detail && <p>{e.detail}</p>}{e.nextAction && <p><b>Далее:</b> {e.nextAction}</p>}
+      {e.publishedUrl && <a href={e.publishedUrl} {...outbound}>Открыть опубликованный пин ↗</a>}
+    </div>
+  </li>)}</ol>;
+}
+
+function Overview({ pins, tasks, activity, selectTab, loading }: { pins: SharedRecord[]; tasks: SharedRecord[]; activity: Activity[]; selectTab: (tab: Tab) => void; loading: boolean }) {
+  const published = pins.filter(r => r.body.status === 'Опубликован' && r.body.publishedUrl).sort((a,b)=>b.body.publishedAt.localeCompare(a.body.publishedAt)||b.updatedAt.localeCompare(a.updatedAt));
+  const upcoming = pins.filter(r => !['Опубликован','Пауза'].includes(r.body.status)).slice(0,5);
+  const priority = (value: string) => value === 'В работе' ? 0 : value === 'Блокер' ? 1 : 2;
+  const nextTasks = tasks.filter(r => r.body.status !== 'Готово').sort((a,b)=>priority(a.body.status)-priority(b.body.status)||(a.body.due || '9999').localeCompare(b.body.due || '9999')).slice(0,4);
+  return <>
+    <div className={s.sectionHeading}><div><p className={s.eyebrow}>ФАКТИЧЕСКИЙ РЕЗУЛЬТАТ</p><h2>Уже опубликовано</h2></div><p>Прямые ссылки на вышедшие пины.</p></div>
+    <div className={s.publishedGrid}>{published.map(r => <a key={r.id} href={r.body.publishedUrl} {...outbound} className={s.publishedCard}>
+      {r.body.mediaUrl && <img src={r.body.mediaUrl} alt={r.body.alt || r.body.title} />}<div><span>{r.id} · {date(r.body.publishedAt)}</span><h3>{r.body.title}</h3><b>Открыть пин ↗</b></div>
+    </a>)}</div>{!published.length && <p className={s.empty}>{loading ? 'Загружаем публикации…' : 'Публикации с подтверждённой ссылкой пока не появились.'}</p>}
+    <div className={s.overviewColumns}>
+      <section className={s.overviewPanel}><div className={s.panelHeading}><h2>Дальнейший план</h2><button onClick={()=>selectTab('plan')}>Медиаплан ↗</button></div>
+        <ol className={s.upcomingList}>{upcoming.map(r=><li key={r.id}><div className={s.activityMeta}><span>{r.id} · {date(r.body.date,true)} МСК</span><Badge value={r.body.status}/></div><h3>{r.body.title}</h3><p>{r.body.nextAction || (r.body.status === 'В очереди' ? 'Проверить фактический выход и сохранить ссылку на пин.' : 'Подготовить материал и подтвердить публикацию.')}</p></li>)}</ol>
+        {!upcoming.length && <p className={s.note}>{loading ? 'Загружаем дальнейший план…' : 'Следующая партия ещё не внесена в рабочую доску.'}</p>}
+        <div className={s.panelHeading}><h3>Следующие задачи</h3><button onClick={()=>selectTab('tasks')}>Все задачи ↗</button></div>
+        <ul className={s.nextTasks}>{nextTasks.map(r=><li key={r.id}><div className={s.activityMeta}><span>{r.id} · {r.body.owner} · {date(r.body.due)}</span><Badge value={r.body.status}/></div><h3>{r.body.title}</h3>{r.body.nextAction && <p>{r.body.nextAction}</p>}</li>)}</ul>
+      </section>
+      <section className={s.overviewPanel}><div className={s.panelHeading}><h2>Последние действия</h2><button onClick={()=>selectTab('activity')}>Весь журнал ↗</button></div><ActivityList entries={activity.slice(0,6)} loading={loading}/></section>
+    </div>
+  </>;
 }
 
 function Report() {
