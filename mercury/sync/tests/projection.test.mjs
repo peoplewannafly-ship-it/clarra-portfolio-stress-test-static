@@ -39,3 +39,14 @@ test('updates require an action summary and next step, and reject internal metad
  assert.notEqual(run({status:'Опубликован'}).status,0);
  assert.notEqual(run({lastAction:'ok',nextAction:'',lastActionRevision:4}).status,0);
 });
+test('new approved pins project without exposing other records; creation cannot reuse launch IDs',()=>{
+ const next={...pin,id:'MP09'};
+ assert.deepEqual(projectRecords([next,{...pin,id:'MP28'},{...pin,id:'MP99'}]).map(r=>r.id),['MP09']);
+ const body={title:'Спальня',status:'План',lastAction:'Подготовлен план.',nextAction:'Проверить оригинал.'};
+ const run=(id,operation)=>spawnSync(process.execPath,['mercury/sync/update.mjs'],{encoding:'utf8',env:{...process.env,VALIDATE_ONLY:'1',BOARD_CHANGES:JSON.stringify([{id,operation,body}])}});
+ assert.equal(run('MP09','create').status,0);
+ assert.notEqual(run('MP01','create').status,0);
+ assert.notEqual(run('T01','create').status,0);
+ assert.notEqual(run('MP28','create').status,0);
+ assert.notEqual(run('MP09','delete').status,0);
+});

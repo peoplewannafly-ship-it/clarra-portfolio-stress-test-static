@@ -1,4 +1,5 @@
 import {isDeepStrictEqual} from 'node:util';
+import {approvedIds,newPinIds} from './approved-ids.mjs';
 
 // Invoked only by an authenticated manual workflow dispatch. Never publishes Pins.
 const endpoint='https://mercury-content-desk.peoplewannafly.chatgpt.site/api/records';
@@ -9,7 +10,9 @@ const changes=JSON.parse(process.env.BOARD_CHANGES||'null');
 if(!Array.isArray(changes)||!changes.length||changes.length>20)throw Error('Expected 1–20 changes');
 const seen=new Set();
 for(const change of changes){
-  if(!change||Object.keys(change).some(k=>!['id','body'].includes(k))||!/^MP0[1-8]$|^T(?:0[1-9]|1[0-2])$/.test(change.id)||seen.has(change.id))throw Error('Invalid or repeated record id');
+  if(!change||Object.keys(change).some(k=>!['id','body','operation'].includes(k))||!approvedIds.has(change.id)||seen.has(change.id))throw Error('Invalid or repeated record id');
+  if(change.operation!==undefined&&change.operation!=='create')throw Error('Invalid operation');
+  if(change.operation==='create'&&(!newPinIds.includes(change.id)||typeof change.body?.title!=='string'||!change.body.title.trim()||change.body.title.length>200||change.body.status!=='План'))throw Error('Creation requires an approved new Pin ID, title and Plan status');
   seen.add(change.id);
   if(!change.body||Array.isArray(change.body)||typeof change.body!=='object'||!Object.keys(change.body).length)throw Error('Expected field patch');
   if(typeof change.body.lastAction!=='string'||!change.body.lastAction.trim()||change.body.lastAction.length>1500||typeof change.body.nextAction!=='string'||change.body.nextAction.length>1000)throw Error('Every action requires a public lastAction summary and nextAction (empty only when finished)');
@@ -30,16 +33,21 @@ async function request(method,body){
 }
 const before=await request('GET');if(!Array.isArray(before.records))throw Error('Invalid board');
 const byId=new Map(before.records.map(r=>[r.id,r]));
-// Validate every record exists before any mutation. Preserve all other body fields.
-for(const c of changes){const r=byId.get(c.id);if(!r||!r.body||!Number.isInteger(r.revision)||r.revision<1)throw Error('Existing versioned record required');}
+// Validate the whole batch before mutation. Creation never replaces an existing ID.
 for(const c of changes){
- const r=byId.get(c.id);const body={...r.body,...c.body, ...(c.body.checks?{checks:{...r.body.checks,...c.body.checks}}:{})};
+ const r=byId.get(c.id);
+ if(c.operation==='create'){if(r)throw Error('Creation ID already exists; read source, do not overwrite');}
+ else if(!r||!r.body||!Number.isInteger(r.revision)||r.revision<1)throw Error('Existing versioned record required');
+}
+for(const c of changes){
+ const r=byId.get(c.id)||{id:c.id,kind:'pin',revision:0,body:{}};
+ const body={...r.body,...c.body, ...(c.body.checks?{checks:{...r.body.checks,...c.body.checks}}:{})};
  if(isDeepStrictEqual(r.body,body)){console.log(`${c.id}: already applied`);continue;}
  body.lastActionRevision=r.revision+1;
  const result=await request('POST',{id:r.id,kind:r.kind,revision:r.revision,body});
  if(!result.record||result.record.id!==r.id||result.record.revision!==r.revision+1||!isDeepStrictEqual(result.record.body,body))throw Error('Write confirmation mismatch');
  byId.set(c.id,result.record);console.log(`${c.id}: saved revision ${result.record.revision}`);
 }
-const after=await request('GET');if(after.records.length!==before.records.length)throw Error('Record count changed during update');
+const after=await request('GET');if(after.records.length!==before.records.length+changes.filter(c=>c.operation==='create').length)throw Error('Unexpected record count changed during update');
 for(const c of changes){const r=after.records.find(r=>r.id===c.id);if(!r||!isDeepStrictEqual(r.body,byId.get(c.id).body))throw Error('Read-back mismatch');}
 console.log(`Verified ${changes.length} patches against the source board`);

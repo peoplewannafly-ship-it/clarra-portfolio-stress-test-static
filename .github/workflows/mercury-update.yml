@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       changes:
-        description: 'JSON array of approved existing record patches; no credentials or private data'
+        description: 'JSON array of approved record patches or explicit new Pin creations; no credentials or private data'
         required: true
         type: string
 permissions:
@@ -25,7 +25,7 @@ jobs:
       - name: Validate public projection and update contract
         id: validation
         run: node --test mercury/sync/tests/projection.test.mjs
-      - name: Update existing source records with revision checks
+      - name: Update source records with revision checks
         env:
           MERCURY_PLAN_READ_TOKEN: ${{ secrets.MERCURY_PLAN_READ_TOKEN }}
           BOARD_CHANGES: ${{ inputs.changes }}

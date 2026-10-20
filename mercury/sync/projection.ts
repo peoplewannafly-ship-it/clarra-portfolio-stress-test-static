@@ -1,3 +1,4 @@
+import {approvedIds} from './approved-ids.mjs';
 export type SharedRecord = {
   id: string;
   kind: 'pin' | 'task';
@@ -5,12 +6,8 @@ export type SharedRecord = {
   body: Record<string, any>;
 };
 
-// The shared view deliberately includes only the approved launch week.
 // Only the explicitly approved records and their public action summaries are shared.
-const ids = new Set([
-  'MP01', 'MP02', 'MP03', 'MP04', 'MP05', 'MP06', 'MP07', 'MP08',
-  'T01', 'T02', 'T03', 'T04', 'T05', 'T06', 'T07', 'T08', 'T09', 'T10', 'T11', 'T12',
-]);
+const ids = approvedIds;
 const commonFields = ['title', 'description', 'status', 'owner', 'nextAction'];
 const pinFields = ['date', 'project', 'rubric', 'board', 'mediaType', 'alt', 'publishedAt'];
 const taskFields = ['category', 'due'];
