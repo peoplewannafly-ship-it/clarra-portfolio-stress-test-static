@@ -717,13 +717,13 @@
     {
       "id": "T07",
       "kind": "task",
-      "updatedAt": "2026-10-22T11:00:29.886Z",
+      "updatedAt": "2026-10-22T11:02:28.511Z",
       "body": {
         "title": "Настроить цели и учёт заявок",
         "description": "Отправка формы, клики в мессенджеры, сохранение UTM. Клик в мессенджер не считать лидом. Нужен доступ к аналитике сайта.",
         "status": "В работе",
         "owner": "Студия",
-        "nextAction": "Продолжить миграцию с пина 625718942024139934, проверяя ссылку и все слайды.",
+        "nextAction": "Продолжить миграцию с пина 625718942024137523, проверяя ссылку и все слайды.",
         "category": "Воронка",
         "due": "2026-10-16"
       }
@@ -800,6 +800,17 @@
     }
   ],
   "activity": [
+    {
+      "id": "history-222",
+      "recordId": "T07",
+      "kind": "task",
+      "at": "2026-10-22T11:02:28.511Z",
+      "title": "Настроить цели и учёт заявок",
+      "status": "В работе",
+      "detail": "22.10.2026 14:02:05.755 МСК: пин 625718942024139934 переведён на Mercury; живая ссылка и UTM проверены после перезагрузки. Подтверждено старых пинов: 63; известный остаток: 575.",
+      "nextAction": "Продолжить миграцию с пина 625718942024137523, проверяя ссылку и все слайды.",
+      "publishedUrl": ""
+    },
     {
       "id": "history-221",
       "recordId": "T07",
@@ -1888,18 +1899,7 @@
       "detail": "21.10.2026, 22:53:33 МСК: живая целевая ссылка проверена: https://mercury-bureau.com/hause_mo?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_formats_202610&utm_content=mp09. Пин ведёт на сайт Mercury, индивидуальная UTM есть.",
       "nextAction": "",
       "publishedUrl": "https://ru.pinterest.com/pin/625718942027227277/"
-    },
-    {
-      "id": "history-122",
-      "recordId": "MP08",
-      "kind": "pin",
-      "at": "2026-10-21T19:54:58.169Z",
-      "title": "Стеклянная перегородка в душевой: лаконичный интерьер ванной",
-      "status": "Опубликован",
-      "detail": "21.10.2026, 22:53:30 МСК: живая целевая ссылка проверена: https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp08. Пин ведёт на сайт Mercury, индивидуальная UTM есть.",
-      "nextAction": "",
-      "publishedUrl": "https://ru.pinterest.com/pin/625718942027242391/"
     }
   ],
-  "checkedAt": "2026-10-22T11:00:32.538Z"
+  "checkedAt": "2026-10-22T11:02:30.714Z"
 }
