@@ -717,7 +717,7 @@
     {
       "id": "T07",
       "kind": "task",
-      "updatedAt": "2026-10-22T09:46:39.276Z",
+      "updatedAt": "2026-10-22T10:37:54.306Z",
       "body": {
         "title": "Настроить цели и учёт заявок",
         "description": "Отправка формы, клики в мессенджеры, сохранение UTM. Клик в мессенджер не считать лидом. Нужен доступ к аналитике сайта.",
@@ -800,6 +800,17 @@
     }
   ],
   "activity": [
+    {
+      "id": "history-218",
+      "recordId": "T07",
+      "kind": "task",
+      "at": "2026-10-22T10:37:54.306Z",
+      "title": "Настроить цели и учёт заявок",
+      "status": "В работе",
+      "detail": "22.10.2026 13:37:29.651 МСК: повторная попытка пина 625718942024145095 не выполнена — Mac заблокирован, Pinterest UI недоступен. Состояние блокера сохранено; подтверждено старых пинов: 60; известный остаток: 578.",
+      "nextAction": "После разблокировки Mac повторить пин 625718942024145095 через Pinterest UI; при успехе продолжить остаток, при новом отказе выдержать 60 минут.",
+      "publishedUrl": ""
+    },
     {
       "id": "history-217",
       "recordId": "T07",
@@ -1888,18 +1899,7 @@
       "detail": "21.10.2026, 22:53:24 МСК: живая целевая ссылка проверена: https://mercury-bureau.com/hause_mo?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp05. Пин ведёт на сайт Mercury, индивидуальная UTM есть.",
       "nextAction": "",
       "publishedUrl": "https://ru.pinterest.com/pin/625718942027189653/"
-    },
-    {
-      "id": "history-118",
-      "recordId": "MP04",
-      "kind": "pin",
-      "at": "2026-10-21T19:54:55.571Z",
-      "title": "Встроенное хранение в прихожей: шкафы до потолка",
-      "status": "Опубликован",
-      "detail": "21.10.2026, 22:53:22 МСК: живая целевая ссылка проверена: https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp04. Пин ведёт на сайт Mercury, индивидуальная UTM есть.",
-      "nextAction": "",
-      "publishedUrl": "https://ru.pinterest.com/pin/625718942027173779/"
     }
   ],
-  "checkedAt": "2026-10-22T09:46:41.434Z"
+  "checkedAt": "2026-10-22T10:37:55.991Z"
 }
