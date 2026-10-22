@@ -717,13 +717,13 @@
     {
       "id": "T07",
       "kind": "task",
-      "updatedAt": "2026-10-22T10:57:52.628Z",
+      "updatedAt": "2026-10-22T11:00:29.886Z",
       "body": {
         "title": "Настроить цели и учёт заявок",
         "description": "Отправка формы, клики в мессенджеры, сохранение UTM. Клик в мессенджер не считать лидом. Нужен доступ к аналитике сайта.",
         "status": "В работе",
         "owner": "Студия",
-        "nextAction": "В ближайший запуск продолжить с пина 625718942024142376; после каждой проверки обновлять T07 и публичный снимок.",
+        "nextAction": "Продолжить миграцию с пина 625718942024139934, проверяя ссылку и все слайды.",
         "category": "Воронка",
         "due": "2026-10-16"
       }
@@ -800,6 +800,17 @@
     }
   ],
   "activity": [
+    {
+      "id": "history-221",
+      "recordId": "T07",
+      "kind": "task",
+      "at": "2026-10-22T11:00:29.886Z",
+      "title": "Настроить цели и учёт заявок",
+      "status": "В работе",
+      "detail": "22.10.2026 13:59:47.427 МСК: пин 625718942024142376 переведён на Mercury; живая ссылка и UTM проверены после перезагрузки. Подтверждено старых пинов: 62; известный остаток: 576.",
+      "nextAction": "Продолжить миграцию с пина 625718942024139934, проверяя ссылку и все слайды.",
+      "publishedUrl": ""
+    },
     {
       "id": "history-220",
       "recordId": "T07",
@@ -1888,18 +1899,7 @@
       "detail": "21.10.2026, 22:53:30 МСК: живая целевая ссылка проверена: https://mercury-bureau.com/design-projects?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp08. Пин ведёт на сайт Mercury, индивидуальная UTM есть.",
       "nextAction": "",
       "publishedUrl": "https://ru.pinterest.com/pin/625718942027242391/"
-    },
-    {
-      "id": "history-121",
-      "recordId": "MP07",
-      "kind": "pin",
-      "at": "2026-10-21T19:54:57.513Z",
-      "title": "ТВ-зона в гостиной: низкая тумба и панорамные окна",
-      "status": "Опубликован",
-      "detail": "21.10.2026, 22:53:28 МСК: живая целевая ссылка проверена: https://mercury-bureau.com/hause_mo?utm_source=pinterest&utm_medium=organic_social&utm_campaign=mercury_launch_202610&utm_content=mp07. Пин ведёт на сайт Mercury, индивидуальная UTM есть.",
-      "nextAction": "",
-      "publishedUrl": "https://ru.pinterest.com/pin/625718942027224397/"
     }
   ],
-  "checkedAt": "2026-10-22T10:57:55.665Z"
+  "checkedAt": "2026-10-22T11:00:32.538Z"
 }
