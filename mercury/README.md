@@ -1,3 +1,5 @@
+> Route update (2026-10-24): the Pinterest media plan is now at `/mercury-plan/`. Its assets and data remain under `/mercury/`. The `/mercury/` entry point is the client account prototype; see `client-portal-readme.md`.
+
 # Mercury shared plan
 
 Public UI: https://go.clarra.ru/mercury/
