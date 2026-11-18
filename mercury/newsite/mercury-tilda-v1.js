@@ -296,7 +296,30 @@ function deliver(rows, contact, method) {
   const record = original.closest('.r');
   record.append(transport);
   busy = button.disabled = true;
-  const cleanup = () => { busy = button.disabled = false; setTimeout(()=>transport.remove(),1000); syncUploader(); };
+  // Tilda adds its challenge to body. A modal dialog above it would intercept every tap.
+  let pausedForCaptcha = false;
+  const challengeObserver = new MutationObserver(()=>{
+    const challenge = document.getElementById('tildaformcaptchabox');
+    if (challenge && quiz.open && transport.querySelector('#js-tildaspec-captcha')) {
+      pausedForCaptcha = true;
+      quiz.close();
+      challenge.focus();
+    } else if (!challenge && pausedForCaptcha) {
+      pausedForCaptcha = false;
+      if (!quiz.open) quiz.showModal();
+      if (!transport.querySelector('#js-tildaspec-captcha')?.value && busy) {
+        cleanup();
+        showError('Проверка прервана. Можно повторить отправку.',button);
+      }
+    }
+  });
+  challengeObserver.observe(document.body,{childList:true});
+  const cleanup = () => {
+    challengeObserver.disconnect();
+    busy = button.disabled = false;
+    setTimeout(()=>transport.remove(),1000);
+    syncUploader();
+  };
   transport.addEventListener('tildaform:aftersuccess',()=>{
     renderRows(document.getElementById('q-summary'),[...rows,['Контакт',contact]]);
     document.getElementById('q-active').hidden=true;
